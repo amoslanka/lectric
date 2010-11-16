@@ -144,6 +144,15 @@
     return flip * index * this.structure.itemWidth();
   };
 
+  BaseSlider.prototype.to = function(index) {
+    var previous = self.currentX;
+    this.currentX = this.limitXBounds(this.pageX(index));
+    if (this.currentX !== previous) {
+      this.update();
+    }
+    return false;
+  };
+
   BaseSlider.prototype.nextPageX = function(currentX) {
     if (this.page(currentX) + 1 <= this.structure.itemCount() - 1) {
       currentX = currentX -this.structure.itemWidth();
