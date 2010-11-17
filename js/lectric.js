@@ -144,6 +144,12 @@
     return flip * index * this.structure.itemWidth();
   };
 
+
+
+
+
+
+
   BaseSlider.prototype.to = function(index) {
     var previous = self.currentX;
     this.currentX = this.limitXBounds(this.pageX(index));
@@ -152,6 +158,24 @@
     }
     return false;
   };
+
+  BaseSlider.prototype.to_element = function(e) {
+    var previous = self.currentX;
+    var index = this.get_item_index(e);
+	return this.to(index);
+  };
+	
+  BaseSlider.prototype.get_item_index = function(e) {
+	var all = this.element.find('.item');
+	for (var i=0; i < all.length; i++) {
+		if ($(all[i])[0] == e[0]) { return i; }
+	}
+  };
+
+
+
+
+
 
   BaseSlider.prototype.nextPageX = function(currentX) {
     if (this.page(currentX) + 1 <= this.structure.itemCount() - 1) {
